@@ -1,0 +1,12 @@
+*.log
+.DS_Store
+node_modules
+.parcel-cache
+.cache
+dist
+
+
+*.lock
+*-lock*
+
+.npmrc

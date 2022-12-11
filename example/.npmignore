@@ -1,7 +1,8 @@
 node_modules
+assets
 .cache
 .parcel-cache
 dist
-
+*.csv
 *.lock
 *-lock*

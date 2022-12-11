@@ -1,5 +1,6 @@
-import express from 'express';
-import { separateNumberByFirstDigit } from '../dist';
+import express, { NextFunction } from 'express';
+import { readCsv, separateNumberByFirstDigit } from '../dist';
+import uploadFile from './services/uploadFile';
 
 const app = express();
 
@@ -10,6 +11,26 @@ const array = [
 ];
 app.get('/', (req, res) => {
   res.send(separateNumberByFirstDigit(array));
+});
+
+app.post('/read-csv', async (req, res, next) => {
+  try {
+    await uploadFile(req, res);
+    if (req.file === undefined) {
+      return res.status(400).send({ message: 'Please upload a file!' });
+    }
+
+    const array = readCsv(req.file.path);
+
+    res.status(200).send({
+      message: 'Uploaded the file successfully: ' + req.file.originalname,
+      contentFile: array,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: `Could not upload the file: ${req.file?.originalname}. ${err}`,
+    });
+  }
 });
 
 app.listen(port, () =>

@@ -1,103 +1,60 @@
-# TSDX User Guide
+# benford-analysis
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+A lib to analisys datasets by newcomb-benford's law
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+## Instalation
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
-
-## Commands
-
-TSDX scaffolds your new library inside `/src`.
-
-To run TSDX, use:
-
-```bash
-npm start # or yarn start
+```
+yarn add benford-analysis
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+## Usage
 
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
+```
+import {
+  readCsv,
+  separateNumberByFirstDigit,
+  getDeviationByFirstDigit,
+  getBenfordFirstDigitExpected,
+} from 'benford-analisys';
 ```
 
-### Rollup
+### `readCsv`
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+You can read files and receive a array with the function
 
-### TypeScript
+props:
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+- csvPath: `string`
 
-## Continuous Integration
+it expect receive the path where you save the upload file, check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)
 
-### GitHub Actions
+### `separateNumberByFirstDigit`
 
-Two actions are added by default:
+You can send an array from a selected column, remember to remove the head or return only number
 
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
+props:
 
-## Optimizations
+- array: `Array<number>`
 
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+This function return an object with the digit d1, d2, d3,..., d9 contains percent and total numbers analized to each digit.
 
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
+Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
-```
+### `getDeviationByFirstDigit`
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+You can define a d number, it to refer the digit. And define a percent about that digit d.
 
-## Module Formats
+props:
+- d: `number`
+- percent: `number`
 
-CJS, ESModules, and UMD module formats are supported.
+It return the digit d, expect percent, percent and the deviation
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)
 
-## Named Exports
+### `getBenfordFirstDigitExpected`
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+It return the expected percent about digits from 1 to 9
 
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
+Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)

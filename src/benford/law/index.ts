@@ -13,3 +13,10 @@ export const getDeviationByFirstDigit = (d: number, percent: number) => {
     deviation,
   };
 };
+export const getBenfordFirstDigitExpected = () => {
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  return array.map(item => ({
+    digit: item,
+    expectedPercent: expectPercentByFirstDigit(item),
+  }));
+};

@@ -9,7 +9,7 @@ export const getDeviationByFirstDigit = (d: number, percent: number) => {
   return {
     digit: d,
     expectPercent,
-    percent: percent,
+    percent,
     deviation,
   };
 };

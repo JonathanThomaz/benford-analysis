@@ -1,11 +1,12 @@
 import express from 'express';
-import { readCsv, separateNumberByFirstDigit } from '../dist';
-import uploadFile from './services/uploadFile';
-import bodyParser from 'body-parser';
 import {
   getBenfordFirstDigitExpected,
   getDeviationByFirstDigit,
-} from './../src/benford/law/index';
+  readCsv,
+  separateNumberByFirstDigit,
+} from '../dist';
+import uploadFile from './services/uploadFile';
+import bodyParser from 'body-parser';
 
 const app = express();
 

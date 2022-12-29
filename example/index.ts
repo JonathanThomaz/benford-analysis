@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getBenfordFirstDigitExpected,
+  getDefaultDeviation,
   getDeviationByFirstDigit,
   readCsv,
   separateNumberByFirstDigit,
@@ -29,11 +30,13 @@ app.post('/separate', (req, res, next) => {
 app.post('/benford-law', (req, res, next) => {
   const { d1, d2, d3, d4, d5, d6, d7, d8, d9 } = req.body;
   const array = [d1, d2, d3, d4, d5, d6, d7, d8, d9];
-  res.send(
-    array.map((item, index) =>
-      getDeviationByFirstDigit(index + 1, item.percent)
-    )
+  const list = array.map((item, index) =>
+    getDeviationByFirstDigit(index + 1, item.percent)
   );
+  const defaultDeviation = getDefaultDeviation(
+    list.map((item) => item.deviation)
+  );
+  res.send({ list, defaultDeviation });
 });
 
 app.post('/read-csv', async (req, res, next) => {

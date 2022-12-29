@@ -12,12 +12,10 @@ export enum EKeys {
   'total' = 'total',
 }
 export type ObjSeparated = {
-  [key in keyof typeof EKeys]: { total: number; percent: number } | number;
+  [key in keyof typeof EKeys]: { total: number; percent: number };
 };
 
-export const separateNumberByFirstDigit = (
-  array: number[]
-): ObjSeparated | {} => {
+export const separateNumberByFirstDigit = (array: number[]): ObjSeparated => {
   let arrayAux: number[][] = [[], [], [], [], [], [], [], [], [], []];
 
   array.map(number => {
@@ -32,8 +30,8 @@ export const separateNumberByFirstDigit = (
         total: value.length,
         percent: (value.length * 100) / array.length / 100,
       },
-      total: array.length,
+      total: { total: array.length, percent: 1 },
     }),
-    {}
+    {} as ObjSeparated
   );
 };

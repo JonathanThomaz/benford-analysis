@@ -58,3 +58,9 @@ Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/
 It return the expected percent about digits from 1 to 9
 
 Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)
+
+### `getDefaultDeviation`
+
+It return the default deviation of a array of numbers
+
+Check on [example](https://github.com/JonathanThomaz/benford-analysis/tree/main/example)

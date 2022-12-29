@@ -1,4 +1,23 @@
-export const separateNumberByFirstDigit = (array: number[]) => {
+export enum EKeys {
+  'd0' = 'd0',
+  'd1' = 'd1',
+  'd2' = 'd2',
+  'd3' = 'd3',
+  'd4' = 'd4',
+  'd5' = 'd5',
+  'd6' = 'd6',
+  'd7' = 'd7',
+  'd8' = 'd8',
+  'd9' = 'd9',
+  'total' = 'total',
+}
+export type ObjSeparated = {
+  [key in keyof typeof EKeys]: { total: number; percent: number } | number;
+};
+
+export const separateNumberByFirstDigit = (
+  array: number[]
+): ObjSeparated | {} => {
   let arrayAux: number[][] = [[], [], [], [], [], [], [], [], [], []];
 
   array.map(number => {

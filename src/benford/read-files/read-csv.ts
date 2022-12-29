@@ -1,6 +1,8 @@
 import fs from 'fs';
 
-export const readCsv = (csvPath: string) => {
+export const readCsv = (
+  csvPath: string
+): Array<string | number> | Array<Array<string | number>> => {
   const fileContent = fs.readFileSync(csvPath, { encoding: 'utf-8' });
 
   const arrayContent = fileContent.replace(/(?:\r\n|\r|\n)/g, ',').split(',');
